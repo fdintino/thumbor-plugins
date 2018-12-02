@@ -31,9 +31,11 @@ class Optimizer(BaseOptimizer):
 
     def optimize(self, buffer, input_file, output_file):
         im = Image.open(input_file)
-        if im.mode in ['1', 'P']:
+        if im.mode in ['1', 'P', 'RGBX']:
             if im.mode == '1':
                 target_mode = 'RGB'
+            elif im.mode == 'RGBX':
+                target_mode = 'RGBA'
             else:
                 # convert() figures out RGB or RGBA based on palette used
                 target_mode = None
